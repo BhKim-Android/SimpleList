@@ -29,6 +29,7 @@ import com.kimbh.simplelist.presentation.viewmodel.MainViewModel
 import com.kimbh.simplelist.ui.theme.SimpleListTheme
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.core.net.toUri
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.LoadState
 
 @AndroidEntryPoint
@@ -46,7 +47,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Main(viewmodel: MainViewModel = hiltViewModel()) {
-    val documents = remember { viewmodel.document }.collectAsLazyPagingItems()
+    val documents = viewmodel.document.collectAsLazyPagingItems()
 
     var isRefreshing by remember { mutableStateOf(false) }
     val context = LocalContext.current
